@@ -36,8 +36,8 @@ namespace ConsoleApp1
                 if (!string.IsNullOrEmpty(token))
                 {
                     //list Item URL
-                    //var message = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/sites/5d3ab322-bf59-4177-91ef-bd2d9bb4a123/lists/c22a7277-f724-4f65-9a8e-a4f0a36c25d9/items?$expand=fields($select=Title,Description)");
-                    var message = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/sites/5d3ab322-bf59-4177-91ef-bd2d9bb4a123/lists/5c3cd208-1e89-4a1b-9e0c-4e50044c3332/items?$expand=fields");
+                    //var message = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/sites/your site ID/lists/c22a7277-f724-4f65-9a8e-a4f0a36c25d9/items?$expand=fields($select=Title,Description)");
+                    var message = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/sites/Your Site ID/lists/5c3cd208-1e89-4a1b-9e0c-4e50044c3332/items?$expand=fields");
                     message.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                     var response = await client.SendAsync(message);
                     if (response.IsSuccessStatusCode)
@@ -55,10 +55,9 @@ namespace ConsoleApp1
         }
         static async Task<string> GetTokenAsync()
         {
-            //var clientId = "2aa8bb19-2657-4fd0-87c7-eff92dfcce9f";
-            var clientId = "137e7d73-5c86-47f8-a5eb-12d169d82ce3";
+            var clientId = "Client ID";
             var authorityUri = $"https://login.microsoftonline.com/common";
-            var redirectUri = "https://localhost";
+            var redirectUri = "https://localhost";//Ensure that this URL is added as Redirect URL in APP Registration
             var scopes = new List<string> { "User.Read", "Sites.Read.All" };
             var publicClient = PublicClientApplicationBuilder
                           .Create(clientId)
